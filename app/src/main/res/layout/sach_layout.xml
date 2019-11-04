@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnExitS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="btnExitS" />
+
+    <EditText
+        android:id="@+id/etMaS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="etMaS"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etTuaS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="etTuaS"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etMaTGS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="etMaTGS"
+        android:inputType="textPersonName" />
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnThemS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Them" />
+
+        <Button
+            android:id="@+id/btnSuaS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sua" />
+
+        <Button
+            android:id="@+id/btnXoaS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xoa" />
+
+        <Button
+            android:id="@+id/btnXemS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xem" />
+    </TableRow>
+
+    <GridView
+        android:id="@+id/gvS"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"/>
+</LinearLayout>
