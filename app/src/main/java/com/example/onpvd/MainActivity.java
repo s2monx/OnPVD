@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 values.put("matacgia", Integer.parseInt(etMaTGS.getText().toString()));
                 if (getContentResolver().update(myContentProvider.uri, values,
                         "masach=?",
-                        new String[]{etMaTG.getText().toString()}) > 0) ;
+                        new String[]{etMaS.getText().toString()}) > 0) ;
                 Toast.makeText(getBaseContext(), "Sua thanh cong", Toast.LENGTH_SHORT).show();
             }
         });
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (getContentResolver().delete(myContentProvider.uri,
                         "masach=?",
-                        new String[]{etMaTG.getText().toString()}) > 0) ;
+                        new String[]{etMaS.getText().toString()}) > 0) ;
                 Toast.makeText(getBaseContext(), "Xoa thanh cong", Toast.LENGTH_SHORT).show();
             }
         });
