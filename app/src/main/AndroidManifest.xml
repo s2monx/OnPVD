@@ -9,8 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Sach_acti"></activity>
-        <activity android:name=".Tacgia_acti" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +19,18 @@
 
         <provider
             android:name=".MyContentProvider"
-            android:authorities="com.example.onpvd.MyContentProvider"
+            android:authorities="com.example.onpvd"
             android:enabled="true"
             android:exported="true"
             android:writePermission="com.example.onpvd.WRITE_DATABASE"
             android:readPermission="com.example.onpvd.READ_DATABASE"/>
     </application>
+
+    <permission android:name="com.example.onpvd.WRITE_DATABASE"
+        android:label="Write Database"
+        android:protectionLevel="normal"/>
+    <permission android:name="com.example.onpvd.READ_DATABASE"
+        android:label="Read Database"
+        android:protectionLevel="normal"/>
 
 </manifest>

@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     GridView gvS;
 
     MyContentProvider myContentProvider = new MyContentProvider();
-    public void anhXaS(Dialog dlS){
+
+    public void anhXaS(Dialog dlS) {
         btnExitS = dlS.findViewById(R.id.btnExitS);
         btnThemS = dlS.findViewById(R.id.btnThemS);
         btnSuaS = dlS.findViewById(R.id.btnSuaS);
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         gvS = dlS.findViewById(R.id.gvS);
     }
+
     public void anhXaTG(Dialog dlTG) {
         btnExitTG = dlTG.findViewById(R.id.btnExitTG);
         btnThemTG = dlTG.findViewById(R.id.btnThemTG);
@@ -107,30 +109,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ArrayList<String> list_string = new ArrayList<>();
-                Cursor cursor = getContentResolver().query(myContentProvider.uri,null,null,null,"tuasach");
-                if (cursor!=null){
+                Cursor cursor = getContentResolver().query(myContentProvider.uri, null, null, null, "tuasach");
+                if (cursor != null) {
                     cursor.moveToFirst();
-                    do{
-                        list_string.add(cursor.getInt(0)+"");
-                        list_string.add(cursor.getString(1)+"");
-                        list_string.add(cursor.getInt(2)+"");
-                    }while (cursor.moveToNext());
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,list_string);
-                    gvS.setAdapter(adapter);
-                }
-                else
-                    Toast.makeText(getApplicationContext(),"Khong co",Toast.LENGTH_SHORT).show();
+                    do {
+                        list_string.add(cursor.getInt(0) + "");
+                        list_string.add(cursor.getString(1) + "");
+                        list_string.add(cursor.getInt(2) + "");
+                    } while (cursor.moveToNext());
+                } else
+                    Toast.makeText(getApplicationContext(), "Khong co", Toast.LENGTH_SHORT).show();
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, list_string);
+                gvS.setAdapter(adapter);
             }
         });
         btnThemS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ContentValues values = new ContentValues();
-                values.put("masach",Integer.parseInt(etMaS.getText().toString()));
-                values.put("tuasach",etTuaS.getText().toString());
-                values.put("matacgia",Integer.parseInt(etMaTGS.getText().toString()));
-                Uri insert_uri = getContentResolver().insert(myContentProvider.uri,values);
-                Toast.makeText(getApplicationContext(),"Luu thanh cong",Toast.LENGTH_SHORT).show();
+                values.put("masach", Integer.parseInt(etMaS.getText().toString()));
+                values.put("tuasach", etTuaS.getText().toString());
+                values.put("matacgia", Integer.parseInt(etMaTGS.getText().toString()));
+                Uri insert_uri = getContentResolver().insert(myContentProvider.uri, values);
+                Toast.makeText(getApplicationContext(), "Luu thanh cong", Toast.LENGTH_SHORT).show();
             }
         });
         btnSuaS.setOnClickListener(new View.OnClickListener() {

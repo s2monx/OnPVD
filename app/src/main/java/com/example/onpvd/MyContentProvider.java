@@ -3,16 +3,21 @@ package com.example.onpvd;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+
+
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 
 public class MyContentProvider extends ContentProvider {
-    static final String AUTHORITY = "com.example.onpvd.MyContentProvider";
+    static final String AUTHORITY = "com.example.onpvd";
     static final String URL = "content://"+AUTHORITY+"/data";
     static final Uri uri = Uri.parse(URL);
     static HashMap<String, String> MAP;
@@ -22,7 +27,34 @@ public class MyContentProvider extends ContentProvider {
         uriMatcher.addURI(AUTHORITY, "data", 1); //all
         uriMatcher.addURI(AUTHORITY, "data"+"/#", 2); //one
     }
+    public static class DBHelper extends SQLiteOpenHelper{
+        public DBHelper(@Nullable Context context) {
+            super(context, "QLSACH", null, 1);
+        }
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("create table tacgia(matacgia integer primary key, tentacgia text, diachi text, email text)");
+            db.execSQL("create table sach(masach integer primary key, tuasach text, matacgia interger constraint fk_matacgia references tacgia(matacgia) on delete cascade) ");
+        }
 
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("drop table if exists sach");
+            db.execSQL("drop table if exists tacgia");
+            onCreate(db);
+        }
+        public  Sach getSach(int masach){
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery("select * from sach where masach = "+masach, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+            }
+            Sach sach = new Sach(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
+            cursor.close();
+            db.close();
+            return sach;
+        }
+    }
     public MyContentProvider() {
     }
 
