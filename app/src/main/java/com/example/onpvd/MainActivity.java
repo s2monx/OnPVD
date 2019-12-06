@@ -178,20 +178,41 @@ public class MainActivity extends AppCompatActivity {
         btnXemTG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> list_string = new ArrayList<>();
-                Cursor cursor = getContentResolver().query(myContentProvider.uri, null, null, null, "tentacgia");
-                if (cursor != null) {
+                if (!etMaTG.getText().toString().isEmpty()) {
+                    ArrayList<String> list_string = new ArrayList<>();
+                    Cursor cursor = getContentResolver().query(Uri.parse(myContentProvider.uri + "/" + etMaTG.getText().toString()), null, null, null, "tentacgia");
                     cursor.moveToFirst();
-                    do {
-                        list_string.add(cursor.getInt(0) + "");
-                        list_string.add(cursor.getString(1) + "");
-                        list_string.add(cursor.getString(2) + "");
-                        list_string.add(cursor.getString(3) + "");
-                    } while (cursor.moveToNext());
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, list_string);
-                    gvTG.setAdapter(adapter);
-                } else
-                    Toast.makeText(getApplicationContext(), "Khong co", Toast.LENGTH_SHORT).show();
+                    if (cursor.isAfterLast()) {
+                        Toast.makeText(MainActivity.this, "Khong co", Toast.LENGTH_SHORT).show();
+                    } else {
+                        while (!cursor.isAfterLast()) {
+                            list_string.add(cursor.getInt(0) + "");
+                            list_string.add(cursor.getString(1) + "");
+                            list_string.add(cursor.getString(2) + "");
+                            list_string.add(cursor.getString(3) + "");
+                            cursor.moveToNext();
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, list_string);
+                        gvTG.setAdapter(adapter);
+                    }
+                } else {
+                    ArrayList<String> list_string = new ArrayList<>();
+                    Cursor cursor = getContentResolver().query(myContentProvider.uri, null, null, null, "tentacgia");
+                    cursor.moveToFirst();
+                    if (cursor.isAfterLast()) {
+                        Toast.makeText(MainActivity.this, "Khong co", Toast.LENGTH_SHORT).show();
+                    } else {
+                        while (!cursor.isAfterLast()) {
+                            list_string.add(cursor.getInt(0) + "");
+                            list_string.add(cursor.getString(1) + "");
+                            list_string.add(cursor.getString(2) + "");
+                            list_string.add(cursor.getString(3) + "");
+                            cursor.moveToNext();
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, list_string);
+                        gvTG.setAdapter(adapter);
+                    }
+                }
             }
         });
         btnThemTG.setOnClickListener(new View.OnClickListener() {
